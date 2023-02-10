@@ -1,7 +1,5 @@
 # Comment thing
 
-q = 3
-n = 301
 
 def odd_operation(n, q):
     odd_step = q*n + 1
@@ -26,12 +24,10 @@ def odd_to_odd_step_counter(n, q):
             
         odd_1 = n #store odd we end at
 
-        print(odd_0, odd_1)
-        print('steps:', steps)
+        # print(odd_0, odd_1)
+        # print('steps:', steps)
     
         return odd_0, odd_1, steps
 
-odd_to_odd_step_counter(n,q)
-#N = odd_even_operation(n, q)
-#print(n,">", N)
+#odd_to_odd_step_counter(n,q)
 
