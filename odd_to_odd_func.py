@@ -2,7 +2,9 @@
 
 
 def odd_operation(n, q):
-    odd_step = q*n + 1
+    b = 1
+    # print('b=',b)
+    odd_step = q*n + b
     return odd_step
 
 def even_operation(n):
