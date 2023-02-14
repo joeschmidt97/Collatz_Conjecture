@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 from rm_dict_builder import rm_dict_builder
 
-q = 9
-N = 30000001
+q = 11
+N = 30001
 all_odd_test = False
 
-
-r_m_dict = rm_dict_builder(q, N)
+r_m_dict, b = rm_dict_builder(q, N)
 print(r_m_dict)
 
 print(q,'n + 1')
@@ -14,7 +13,7 @@ for i,r in enumerate(r_m_dict['r']):
     
     r = r_m_dict['r'][i]
     odd = r_m_dict['base_odd'][i]
-    m = r_m_dict['even_offset'][i]
+    m = r_m_dict['odds_diff'][i]
 
     print('r:',r,'|', odd,'+', m,'m')
 print('--------------------')
