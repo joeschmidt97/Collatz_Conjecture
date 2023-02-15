@@ -4,7 +4,6 @@ from rm_dict_builder import rm_dict_builder
 
 # R-step data to/from CSV 
 
-
 def WRITE_r_step_to_CSV(q, n_max):
     rm_dict, r_step_dict = rm_dict_builder(q, n_max)
 
@@ -73,21 +72,3 @@ def READ_rm_dict_to_CSV(filename):
                     rm_dict[header[i]].append(int(row[i])) # Add the value to the list associated with the key
 
     return rm_dict
-
-
-
-
-
-
-
-
-
-q = 3
-n_max = 100003
-# WRITE_r_step_to_CSV(q, n_max)
-# WRITE_rm_dict_to_CSV(q, n_max)
-# r_step_dict = READ_r_step_from_CSV('3n_plus_1_r_step_data.csv')
-
-rm_dict = READ_rm_dict_to_CSV('3n_plus_1_rm_data.csv')
-print(rm_dict)
-
