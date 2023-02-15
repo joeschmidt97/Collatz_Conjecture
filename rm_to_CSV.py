@@ -10,13 +10,13 @@ def r_step_dict_to_CSV(q, n_max):
         writer = csv.writer(csvfile) # create a CSV writer object
 
         # get the maximum length of the values in the dictionary
-        max_len = max(len(values) for values in r_step_dict.values())
+        max_len = min(max(len(values) for values in r_step_dict.values()), 100) #limit the max length of column printouts to 100
         col_labels = ['r'] + [f'm={i}' for i in range(max_len)] # create a list of column labels
         writer.writerow(col_labels)         # write the header row with column names
 
         # write the data rows with values and empty cells as needed
         for key, values in r_step_dict.items():
-            row = [key] + values + [''] * (max_len - len(values))
+            row = [key] + values[:max_len] + [''] * (max_len - len(values))
             writer.writerow(row)
 
 
