@@ -1,4 +1,4 @@
-from odd_to_odd_func import odd_to_odd_step_counter
+from FUNC_odd_to_odd import odd_to_odd_step_counter
 
 
 
