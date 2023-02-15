@@ -1,6 +1,6 @@
 import csv
 import os
-from rm_dict_builder import rm_dict_builder
+from FUNC_rm_dict_builder import rm_dict_builder
 
 
 # R-step data to/from CSV 
@@ -8,14 +8,9 @@ from rm_dict_builder import rm_dict_builder
 def WRITE_r_step_to_CSV(q, n_max, filepath):
     rm_dict, r_step_dict = rm_dict_builder(q, n_max)
 
-    # directory_path = 'C:\Users\joesc\git\Collatz_Conjecture\Collatz_Conjecture\DATA_qn_plus_1'
-    # directory_path = os.path.dirname(os.getcwd()) + '\DATA'
     os.chdir(filepath)
+    filename = 'q='+ str(q) + '_r_step_data.csv'
 
-    print('path')
-    print(os.getcwd())
-
-    filename = str(q) + 'n_plus_1_r_step_data.csv'
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile) # create a CSV writer object
 
@@ -31,6 +26,9 @@ def WRITE_r_step_to_CSV(q, n_max, filepath):
 
 
 def READ_r_step_from_CSV(filename):
+
+    print(filename)
+
     r_step_dict = {}
 
     with open(filename, 'r', newline='') as csvfile:
@@ -50,17 +48,16 @@ def READ_r_step_from_CSV(filename):
 
 # RM data to/from CSV 
 
-def WRITE_rm_dict_to_CSV(q, n_max):
+def WRITE_rm_dict_to_CSV(q, n_max, filepath):
     rm_dict, r_step_dict = rm_dict_builder(q, n_max)
     
-    directory_path = os.path.dirname(os.getcwd()) + '\DATA'
+    os.chdir(filepath)
+    filename = 'q='+ str(q) + '_rm_data.csv'
 
-    filename = str(q) + 'n_plus_1_rm_data.csv'
-    with open(os.path.join(directory_path, filename), 'w', newline='') as csvfile:
+    with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(rm_dict.keys())
         writer.writerows(zip(*rm_dict.values()))
-
 
 
 def READ_rm_dict_to_CSV(filename):
@@ -82,8 +79,3 @@ def READ_rm_dict_to_CSV(filename):
 
     return rm_dict
 
-q = 5
-n_max = 103
-WRITE_r_step_to_CSV(q, n_max)
-WRITE_rm_dict_to_CSV(q, n_max)
-print('done')
