@@ -1,22 +1,16 @@
+import os
 import matplotlib.pyplot as plt
-from rm_dict_builder import rm_dict_builder
+from FUNC_rm_to_CSV import READ_rm_dict_to_CSV
 
-q = 11
-N = 30001
-all_odd_test = False
+q = 13
 
-r_m_dict, b = rm_dict_builder(q, N)
-print(r_m_dict)
+path = 'C:/Users/joesc/git/Collatz_Conjecture/Collatz_Conjecture/DATA'
+os.chdir(path)
+filename = 'q=' + str(q) + '_rm_data.csv' #change file depending on q value
 
+r_m_dict = READ_rm_dict_to_CSV(filename)
 print(q,'n + 1')
-for i,r in enumerate(r_m_dict['r']):
-    
-    r = r_m_dict['r'][i]
-    odd = r_m_dict['base_odd'][i]
-    m = r_m_dict['odds_diff'][i]
 
-    print('r:',r,'|', odd,'+', m,'m')
-print('--------------------')
 
 odd_list = r_m_dict['base_odd']
 odd_diff_list = [odd_list[i+1] - odd_list[i] for i in range(len(odd_list)-1)]
@@ -27,7 +21,6 @@ for i in range(len(odd_diff_list)):
     odd_diff_DIV = odd_diff_list[i]//(2**(i+1))
 
     mod_odd_diff.append(odd_diff_DIV)
-
     print('odd diff:', odd_diff, '| odd diff/2^r:',odd_diff_DIV)
 
 plt.figure()
@@ -36,46 +29,9 @@ plt.plot(r_m_dict['r'][:-1],mod_odd_diff, "-o")
 # Show/save figure as desired.
 plt.show()
 
-print(r_m_dict['r'][:-1])
-print(mod_odd_diff)
+# print(r_m_dict['r'][:-1])
+# print(mod_odd_diff)
 # print(odd_diff_list)
 
-
-
-last_odd = 29
-print('--------------------------')
-
-if all_odd_test:
-    for q in range(3,last_odd,2):
-        # print(q)
-
-        r_m_dict = rm_dict_builder(q, N)
-        for i,r in enumerate(r_m_dict['r']):
-            
-            r = r_m_dict['r'][i]
-            odd = r_m_dict['base_odd'][i]
-            m = r_m_dict['even_offset'][i]
-
-        
-        odd_list = r_m_dict['base_odd']
-        odd_diff_list = [odd_list[i+1] - odd_list[i] for i in range(len(odd_list)-1)]
-        mod_odd_diff = []
-
-        for i in range(len(odd_diff_list)):
-            odd_diff = odd_diff_list[i]
-            odd_diff_DIV = odd_diff_list[i]//(2**(i+1))
-
-            mod_odd_diff.append(odd_diff_DIV)
-
-        
-        print(q, mod_odd_diff)
-        
-        # print(odd_diff_list)
-        
-        plt.figure()
-        plt.title(q)
-        plt.plot(r_m_dict['r'][:-1],mod_odd_diff, "-o")
-        # Show/save figure as desired.
-    plt.show()
 
 
