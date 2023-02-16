@@ -49,6 +49,7 @@ def READ_r_step_from_CSV(filename):
 # RM data to/from CSV 
 
 def WRITE_rm_dict_to_CSV(q, n_max, filepath):
+    #CHANGE CODE TO READ FROM CSV FILE INSTEAD OF GENERATING DATA
     rm_dict, r_step_dict = rm_dict_builder(q, n_max)
     
     os.chdir(filepath)
