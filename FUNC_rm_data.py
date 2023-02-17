@@ -2,7 +2,7 @@ import csv
 import os
 from statistics import mode
 from collections import defaultdict
-from A_FUNC_rstep_data import READ_rstep_from_CSV
+from FUNC_rstep_data import READ_rstep_from_CSV
 
 def rm_dict_builder(q):
     rstep_dict = READ_rstep_from_CSV(q)
