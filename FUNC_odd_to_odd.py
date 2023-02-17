@@ -1,4 +1,3 @@
-# Comment thing
 
 
 def odd_operation(n, q):
@@ -26,10 +25,5 @@ def odd_to_odd_step_counter(n, q):
             
         odd_1 = n #store odd we end at
 
-        # print(odd_0, odd_1)
-        # print('steps:', steps)
-    
         return odd_0, odd_1, steps
-
-#odd_to_odd_step_counter(n,q)
 
