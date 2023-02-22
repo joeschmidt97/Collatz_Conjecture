@@ -4,6 +4,20 @@ from statistics import mode
 from collections import defaultdict
 from FUNC_rstep_data import READ_rstep_from_CSV
 
+
+def smallest_base_odd(lst):
+    base_odd = None  # Initialize a variable to hold the smallest, positive odd found so far
+    
+    for num in lst: # Iterate over each element in the list
+        if num > 0 and num % 2 == 1: # Check if the number is both positive and odd
+            # If smallest_odd is still None or the current number is smaller than smallest_odd, update smallest_odd
+            if base_odd is None or num < base_odd:
+                base_odd = num
+    
+    return base_odd
+
+
+
 def rm_dict_builder(q):
     rstep_dict = READ_rstep_from_CSV(q)
     
@@ -16,7 +30,7 @@ def rm_dict_builder(q):
         diff_list = [r_odds[i+1] - r_odds[i] for i in range(len(r_odds)-1)] #compute the difference between odds in an r (step) family
 
         if diff_list:
-            base_odd = r_odds[0] #This is the base odd
+            base_odd = smallest_base_odd(r_odds) #r_odds[0] #This is the base odd
             even_offset = mode(diff_list) #Get the even_offset as the most likely difference between odds
 
             #Add r, base_odd, and even_offset as lists to a dict
@@ -27,6 +41,9 @@ def rm_dict_builder(q):
     rm_dict = dict(rm_dict) #Convert rm_dict list to dictionary
 
     return rm_dict
+
+
+
 
 
 def WRITE_rm_to_CSV(q):
