@@ -22,6 +22,19 @@ def count_r_steps(q, n):
     return r_count
 
 
+
+
+
+
+
+
+
+
+
+
+
+### WRITE r-families by going through odds one by one ##################
+
 def write_r_families(q, int_i, int_f, r_cutoff=float('inf')):
 
     odd_int_check(int_i) #check if variable is an odd integer
@@ -54,7 +67,7 @@ def r_dict_to_csv(r_dict):
     with open('output.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['q', r_dict['q']])
-        writer.writerow(['odd_count', 'r', 'odds'])
+        writer.writerow(['len', 'r', 'odds'])
         for key, values in r_dict.items():
 
             if isinstance(key, int):
