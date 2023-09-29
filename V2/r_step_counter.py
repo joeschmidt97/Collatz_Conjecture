@@ -1,3 +1,5 @@
+import csv
+
 
 def odd_int_check(x):
     # check if given input is an odd integer, if not return an error
@@ -23,6 +25,7 @@ def count_r_steps(q, n):
 
 
 ### WRITE r-families by seeding odd int taking r-steps, explore +/- 2^(r+1) , and adding modulo class for skipping checks ################
+
 
 
 def write_r_families_MODULO(q:int, r_count_i:int, r_count_f:int, r_len_cutoff:int = 20):
@@ -61,7 +64,6 @@ def write_r_families_MODULO(q:int, r_count_i:int, r_count_f:int, r_len_cutoff:in
                   if r_count_i <= r_key <= r_count_f}
 
     return r_dict_cut
-
 
 
 def complete_r_family(q:int, n_i:int, r_len_cutoff:int=10):
@@ -120,8 +122,6 @@ def make_modulo_r_family(r_count:int, r_family:list):
 
 
 
-
-
 def check_in_modulo_family(n_check:int, r_family_dict:dict):
 
     smallest_odd, remainder = r_family_dict['modulo']
@@ -136,6 +136,56 @@ def check_in_modulo_family(n_check:int, r_family_dict:dict):
     return in_r_family
 
 
+
+################## WRITE and READ r-families to CSV  ########################
+
+
+def write_r_dict_to_CSV(r_dict):
+    
+    filename = f"DATA/q={r_dict['q']}_r_data.csv"
+
+    with open(filename, 'w', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        
+        writer.writerow(['q', r_dict['q']])
+        # Write the header row
+        writer.writerow(['r', 'modulo', 'len_odds', 'odds'])
+
+        # Iterate over the data and write rows
+        for r_step, r_family_dict in r_dict.items():
+            if isinstance(r_step, int):
+                row = [r_step, r_family_dict['modulo'], len(r_family_dict['r_family'])] +  r_family_dict['r_family']
+                writer.writerow(row)
+
+
+def read_CSV_to_r_dict(filename):
+    r_dict = {}
+    
+    with open(filename, 'r', newline='') as csv_file:
+        reader = csv.reader(csv_file)
+        header = next(reader)
+        
+        if header[0] != 'q':
+            raise ValueError("Invalid CSV format. The first row should start with 'q'.")
+        
+        r_dict_values = {}
+        
+        for row in reader:
+            if row[0] == 'q':
+                r_dict['q'] = int(row[1])
+            else:
+                try: 
+                    r_step = int(row[0])
+                    modulo = eval(row[1])  # Use eval to convert the string "(1, 4)" to a tuple
+                    r_family = [int(value) for value in row[3:]]  # Convert remaining values to integers
+                
+                    r_dict_values[r_step] = {'modulo': modulo, 'r_family': r_family}
+                except:
+                    pass
+
+        r_dict.update(r_dict_values)
+    
+    return r_dict
 
 
 
@@ -170,9 +220,6 @@ def write_r_families_ITERATIVE(q, int_i, int_f, r_cutoff=float('inf')):
 
     return sorted_r_families
 
-
-
-import csv
 
 def r_dict_to_csv(r_dict):
     # Create a CSV file and write the data
